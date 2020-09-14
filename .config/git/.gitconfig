@@ -1,0 +1,55 @@
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	trustctime = false
+	untrackedCache = true
+[color "branch"]
+	current = red
+	local = yellow 
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[push]
+	default = simple
+	followTags = true
+[user]
+	email = rdjamaile@gmail.com
+	name = djamaile
+[help]
+	autocorrect = 1
+[merge]
+	log = true
+[alias]
+	l = log --graph --pretty=myline --abbrev-commit --date=relative
+	la = l -all
+	ls = l --pretty=myfull --stat
+	lp = l --pretty=myfull --patch
+	s = status -sb
+	p = pull
+	psm = pull --recurse-submodules
+	c = clone --recursive
+	ca = !git add -A && git commit -av
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\";  }; f"
+	branches = branch -a
+	remotes = remote -v
+	aliases = config --get-regexp alias
+	fb = "!f() { git branch -a --contains $1;  }; f"
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1;  }; f"
+	# Delete merged branches
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	contributors = shortlog --summary --numbered
+	bs = switch 
+	mr = merge 
+[pretty]
+		myline = %C(auto)%h %s %C(green)(%cr)%C(auto) %C(blue)<%an>%C(auto)%d
+		myfull = format:%C(auto)%h %C(bold)%s%C(auto) %d%nAuthor: %C(blue)%an <%ae>%C(auto)%nAuthor Date: %C(green)%ad (%ar)%C(auto)%nCommitter: %C(blue)%cn <%ce>%C(auto)%nCommitter Date: %C(green)%cd (%cr)%C(auto)%n%w(76,4,4)%+b
+
